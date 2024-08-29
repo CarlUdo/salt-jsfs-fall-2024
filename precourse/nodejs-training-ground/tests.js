@@ -12,6 +12,14 @@ describe("age calculator", () => {
 });
 
 describe('age classifier', () => {
+  it('less than 0 years should be not born', () => {
+    // act
+    const result = getAgeGroup(-1);
+
+    //assert
+    assert.equal(result, 'not born')
+  });
+
   it('0-3 years old should be a toddler', () => {
     // act
     const result = getAgeGroup(0);
@@ -58,5 +66,13 @@ describe('age classifier', () => {
 
     // assert
     assert.equal(result, 'prime')
+  });
+
+  it('above 100 years old.. you are most probaly dead', () => {
+    // act
+    const result = getAgeGroup(101);
+
+    //assert
+    assert.equal(result, 'probably dead')
   });
 });

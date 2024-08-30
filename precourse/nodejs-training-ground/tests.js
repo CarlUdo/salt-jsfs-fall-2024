@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { getAge, getAgeGroup, getAgeForPerson } from './index.js';
+import { getAge, getAgeGroup, getAgeForPerson, divideIt } from './index.js';
 
 describe("age calculator", () => {
   it("someone born 1976 is 48 2024", () => {
@@ -299,4 +299,33 @@ describe('object are for building things', () => {
     assert.equal(klara.favoriteColor, 'purple')
     assert.equal(carl.hobbies[1], 'coding')
   });
+});
+
+describe('when things go awry...', () => {
+  it ('dividing two numbers with each other', () => {
+    // arrange 
+    const firstNumber = 19;
+    const secondNumber = 5;
+
+    // act 
+    const result = divideIt(firstNumber, secondNumber);
+
+    // assert
+    assert.equal(result, firstNumber/secondNumber);
+  });  
+
+  it ('dividing with zero', () => {
+    // arrange 
+    const firstNumber = 19;
+    const secondNumber = 0;
+
+    try {
+      // act 
+      const result = divideIt(firstNumber, secondNumber);
+    } catch (error) {
+      // assert
+      assert.notEqual(error, undefined);
+      assert.equal(error.message, 'No divison with zero please...')
+    }    
+  });  
 });

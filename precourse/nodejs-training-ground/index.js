@@ -12,3 +12,11 @@ export const getAgeGroup = (age) => {
   if (age > 100) return 'probably dead';
   return 'old'
 };
+
+export const divideIt = (firstNumber, secondNumber) => {
+  if (secondNumber === 0) {
+    throw new Error(`No divison with zero please...`)
+  }
+  
+  return firstNumber / secondNumber;
+};

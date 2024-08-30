@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { getAge, getAgeGroup } from './index.js';
+import { getAge, getAgeGroup, getAgeForPerson } from './index.js';
 
 describe("age calculator", () => {
   it("someone born 1976 is 48 2024", () => {
@@ -236,5 +236,67 @@ describe('loops does things over and over', () => {
     // assere
     assert.equal(lowNumbers.length, 3);
   });
+});
 
+describe('object are for building things', () => {
+  it('our first object - a human', () => {
+    // arrange
+    const person = {
+      name: 'Marcus',
+      birthYear: 1972,
+      isTeacher: true,
+    };
+
+    // assert
+    assert.equal(person.name, 'Marcus');
+    assert.equal(person.birthYear, 1972);
+    assert.equal(person.isTeacher, true);
+  });
+
+  it('get age for person', () => {
+    // arrange
+    const currentYear = 2022;
+
+    const person = {
+      name: 'Marcus',
+      birthYear: 1972,
+      isTeacher: true,
+    };
+  
+    // act
+    const age = getAgeForPerson(person, currentYear);
+  
+    // assert
+    assert.equal(age, 50);
+  });
+
+  it('a list of persons - people that is - with their hobbies', () => {
+    // arrange 
+    const vera = {
+      age: 32,
+      hobbies: ['play the piano', 'rollerblading', 'fishing'],
+      favoriteColor: 'green'
+    };
+
+    const klara = {
+      age: 38,
+      hobbies: ['climbing', 'dancing', 'swimming'],
+      favoriteColor: 'purple'
+    };
+
+    const carl = {
+      age: 48,
+      hobbies: ['boating', 'coding', 'biking'],
+      favoriteColor: 'blue'
+    };
+
+    const people = [vera, klara, carl];
+
+    // assert
+    assert.equal(vera.age, 32)
+    assert.equal(klara.age, 38)
+    assert.equal(klara.hobbies[2], 'swimming')
+    assert.equal(klara.favoriteColor, 'purple')
+    assert.equal(carl.hobbies[1], 'coding')
+  });
 });

@@ -1,5 +1,7 @@
 export const getAge = (birthYear, currentYear) => currentYear - birthYear;
 
+export const getAgeForPerson = (person, currentYear) => currentYear - person.birthYear;
+
 export const getAgeGroup = (age) => {
   if (age < 0) return 'not born'
   if (age < 4) return 'toddler';

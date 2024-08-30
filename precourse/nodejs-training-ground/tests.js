@@ -122,25 +122,119 @@ describe('constants and variables', () => {
     isCatAlive = peekIntoTheBox();
     assert.equal(false, isCatAlive);
   });
+});
 
-  describe('loops does things over and over', () => {
-    it.skip('while-loops just keeps going ...', () => {
-      // act
-      while (1 < 2) {
-        console.log('Another lap in the loop');
-      }
-    });
-
-    it('while-loops just keeps going unless we stop them', () => {
-      // arrange
-      let counter = 0;
-    
-      // act
-      while (counter < 2) {
-        console.log(`Counter is now '${counter}'`);
-    
-        counter++;
-      }
-    });
+describe('loops does things over and over', () => {
+  it.skip('while-loops just keeps going ...', () => {
+    // act
+    while (1 < 2) {
+      console.log('Another lap in the loop');
+    }
   });
+
+  it('while-loops just keeps going unless we stop them', () => {
+    // arrange
+    let counter = 0;
+  
+    // act
+    while (counter < 2) {
+      console.log(`Counter is now '${counter}'`);
+  
+      counter++;
+    }
+  });
+
+  it('arrays keep values', () => {
+    // arrange
+    const array1 = [1, 2, 3, 4];
+    const array2 = ['Marcus', 'Eliza', 'Obaid'];
+    const array3 = ['Marcus', 49, true];
+  });
+
+  it('getting elements out of arrays', () => {
+    // arrange
+    const names = ['Marcus', 'Eliza', 'Obaid'];
+  
+    // act
+    const firstElement = names[0];
+    const secondElement = names[1];
+  
+    const length = names.length;
+    const lastElement = names[length - 1];
+  
+    // assert
+    assert.equal(firstElement, 'Marcus');
+    assert.equal(secondElement, 'Eliza');
+    assert.equal(lastElement, 'Obaid');
+    assert.equal(length, 3);
+  });
+
+  it('removing last element from array using slice', () => {
+    // arrange
+    const names = ['Marcus', 'Eliza', 'Obaid', 'Arvid'];
+    
+    // assert
+    assert.equal(names.length, 4);
+  
+    // act
+    names.splice(names.length - 1, 1);
+  
+    // assert
+    assert.equal(names.length, 3);
+    assert.equal(names[3], undefined);
+  });
+
+  it('removing first elements from array using slice', () => {
+    // arrange
+    const names = ['Marcus', 'Eliza', 'Obaid', 'Arvid'];
+    
+    // assert
+    assert.equal(names.length, 4);
+  
+    // act
+    names.splice(0, 1);
+  
+    // assert
+    assert.equal(names.length, 3);
+    assert.equal(names[0], 'Eliza');
+  });
+
+  it('filter an array - mutable', () => {
+    // arrange
+    const numbers = [10, 23, 13, 33, 8, 12];
+    
+    // assert
+    assert.equal(numbers.length, 6);
+  
+    // act (solution with incrementing i)
+    for (let i = 0; i < numbers.length; i++) {
+      if (numbers[i] > 10) {
+        numbers.splice(i, 1);
+        i--;
+      }
+    }    
+
+    // act (solution with decrementing i)
+    for (let i = numbers.length - 1; i >= 0; i--) {
+      if (numbers[i] > 10) {
+        numbers.splice(i, 1);
+      }
+    }  
+  
+    // assert
+    assert.equal(numbers.length, 2);
+    assert.equal(numbers[0], 10);
+  });
+
+  it('filter an array - immutable', () => {
+    // arrange
+    const numbers = [10, 23, 1, 33, 8, 12];
+  
+    // act
+    const lowNumbers = numbers.filter(x => x > 10);
+  
+    // assere
+    assert.equal(lowNumbers.length, 3);
+  });
+
 });

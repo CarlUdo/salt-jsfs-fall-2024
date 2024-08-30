@@ -122,4 +122,25 @@ describe('constants and variables', () => {
     isCatAlive = peekIntoTheBox();
     assert.equal(false, isCatAlive);
   });
+
+  describe('loops does things over and over', () => {
+    it.skip('while-loops just keeps going ...', () => {
+      // act
+      while (1 < 2) {
+        console.log('Another lap in the loop');
+      }
+    });
+
+    it('while-loops just keeps going unless we stop them', () => {
+      // arrange
+      let counter = 0;
+    
+      // act
+      while (counter < 2) {
+        console.log(`Counter is now '${counter}'`);
+    
+        counter++;
+      }
+    });
+  });
 });

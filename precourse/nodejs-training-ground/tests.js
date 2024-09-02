@@ -1,5 +1,11 @@
 import assert from 'assert';
-import { getAge, getAgeGroup, getAgeForPerson, divideIt } from './index.js';
+import { 
+  getAge, 
+  getAgeGroup, 
+  getAgeForPerson, 
+  divideIt,
+  addWithLog
+} from './index.js';
 
 describe("age calculator", () => {
   it("someone born 1976 is 48 2024", () => {
@@ -328,4 +334,27 @@ describe('when things go awry...', () => {
       assert.equal(error.message, 'No divison with zero please...')
     }    
   });  
+});
+
+describe('callbacks', () => {
+  it('adding with logger', () => {
+    // arrange 
+    const logThis2 = message => console.log(message);
+
+    // act
+    const result = addWithLog(1, 89, logThis2);
+
+    // assert
+    assert.equal(result, 90);
+  });
+
+  it('adding with inline logger', () => {
+    // act
+    const result = addWithLog(1, 89, message => {
+      console.log(message);
+    });
+  
+    // assert
+    assert.equal(result, 90);
+  });
 });

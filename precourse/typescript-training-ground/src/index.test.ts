@@ -1,10 +1,15 @@
 import 'mocha';
 import assert from 'assert';
 import {
-  greet, isOld, countOdd, sumEven, getPersonStreetNo, EmployeeClass, IPerson, PersonClass,
-  getPersonNameString, printThis, optionallyAdd, greetPeople
+  greet, isOld, countOdd, sumEven, getPersonStreetNo, getPersonNameString, printThis,
+  optionallyAdd, greetPeople, addToStart,
 } from './index';
-import type { Person } from './index';
+import type {
+  Person as TPerson, Address, IPerson,
+} from './types';
+import Person from './classes/Person';
+import Employee from './classes/Employee';
+import ListWrapper from './classes/Wrapper';
 
 describe('ts tests', () => {
   it('get greeting', () => {
@@ -76,7 +81,7 @@ describe('ts tests', () => {
 
   it('gets the street number for a person', () => {
     // arrange
-    const p: Person = {
+    const p: TPerson = {
       name: 'Marcus',
       birthYear: 1972,
       address: {
@@ -95,8 +100,8 @@ describe('ts tests', () => {
 
   it('using classes', () => {
     // arrange
-    const p = new PersonClass('Marcus', 1972);
-    const e = new EmployeeClass('Marcus Employee', 1972);
+    const p = new Person('Marcus', 1972);
+    const e = new Employee('Marcus Employee', 1972);
 
     // act
     e.setEmployeeId = 12345;
@@ -133,16 +138,16 @@ describe('ts tests', () => {
     // act
     const result1 = printThis(undefined);
     const result2 = printThis(null);
-  
+
     // assert
-    assert.strictEqual(result1, "no person supplied");
-    assert.strictEqual(result2, "no person supplied");
+    assert.strictEqual(result1, 'no person supplied');
+    assert.strictEqual(result2, 'no person supplied');
   });
 
   it('optional parameters', () => {
     // act
     const sum = optionallyAdd(1, 2, 3, 4, 5);
-  
+
     // assert
     assert.strictEqual(sum, 15);
   });
@@ -160,17 +165,98 @@ describe('ts tests', () => {
       'David',
       'Julia',
       'Wietse',
-      'Lucas'
+      'Lucas',
     );
-  
+
     // assert
-    assert.strictEqual(greeting1, 'Hello'); 
+    assert.strictEqual(greeting1, 'Hello');
     assert.strictEqual(greeting2, 'Hello Marcus');
     assert.strictEqual(greeting3, 'Hello Marcus and Dasha');
     assert.strictEqual(greeting4, 'Hello Marcus and Dasha and David');
     assert.strictEqual(
       greeting5,
-      'Hello Marcus and Dasha and David and Julia and Wietse and Lucas'
+      'Hello Marcus and Dasha and David and Julia and Wietse and Lucas',
     );
+  });
+
+  it('add to list', () => {
+    // arrange
+    const listOfPeople: IPerson[] = [{ name: 'Marcus', birthYear: 1972 }];
+    const listOfAddresses: Address[] = [
+      { street: 'Strålgatan', streetNo: 23, city: 'Stockholm' },
+      { street: 'SchraeschazschStrasse', streetNo: 2, city: 'Amsterdam' },
+    ];
+
+    // act
+    const numberOfPeople = addToStart<IPerson>(listOfPeople, {
+      name: 'David',
+      birthYear: 1975,
+    });
+
+    const numberOfAddresses = addToStart<Address>(listOfAddresses, {
+      street: 'Champs Elysee',
+      streetNo: 1,
+      city: 'Paris',
+    });
+
+    // assert
+    assert.strictEqual(numberOfPeople[0].name, 'David');
+    assert.strictEqual(numberOfAddresses[0].city, 'Paris');
+  });
+
+  it('wrapper for addresses', () => {
+    // arrange
+    const listOfAddresses: Address[] = [
+      { street: 'Strålgatan', streetNo: 23, city: 'Stockholm' },
+      { street: 'SchraeschazschStrasse', streetNo: 2, city: 'Amsterdam' },
+      { street: 'Champs Elysee', streetNo: 1, city: 'Paris' },
+    ];
+
+    // act
+    const list = new ListWrapper<Address>(listOfAddresses);
+
+    // assert
+    assert.strictEqual(list.first.city, 'Stockholm');
+    assert.strictEqual(list.last.city, 'Paris');
+  });
+
+  it('wrapper for persons', () => {
+    // arrange
+    const listOfPersons: TPerson[] = [
+      {
+        name: 'Carl',
+        birthYear: 1976,
+        address: {
+          street: 'Strålgatan',
+          streetNo: 23,
+          city: 'Stockholm',
+        },
+      },
+      {
+        name: 'Greta',
+        birthYear: 1927,
+        address: {
+          street: 'SchraeschazschStrasse',
+          streetNo: 2,
+          city: 'Amsterdam',
+        },
+      },
+      {
+        name: 'Louise',
+        birthYear: 1990,
+        address: {
+          street: 'Champs Elysee',
+          streetNo: 1,
+          city: 'Paris',
+        },
+      },
+    ];
+
+    // act
+    const list = new ListWrapper<TPerson>(listOfPersons);
+
+    // assert
+    assert.strictEqual(list.first.name, 'Carl');
+    assert.strictEqual(list.last.address.city, 'Paris');
   });
 });

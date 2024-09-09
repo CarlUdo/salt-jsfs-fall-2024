@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .mainResult {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-size: 80px;
+    }
+    .negativeResult {
+      background-color: red;
+      color: white;
+    }
+    .positiveResult {
+      background-color: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="mainResult">1000</h1>
+    <h1 class="mainResult">-1000</h1>
+    <h1 class="mainResult">A name - not a number</h1>
+  </main>  
+  <script>
+    const classNodes = document.querySelectorAll('[class]');
+    
+    for (let i = 0; i < classNodes.length; i++) {
+      const innerHtml = Number(classNodes[i].innerHTML);
+
+      if (!Number.isNaN(innerHtml)) {
+        if (innerHtml < 0 ) {
+          classNodes[i].classList.add('negativeResult');
+        } else {
+          classNodes[i].classList.add('positiveResult');
+        }
+      }  
+    }
+  </script>
+</body>
+</html>

@@ -11,6 +11,26 @@
     // const getCompanyName = () => 'SALT';
     // console.log(`salt> In the head.`);
     console.log('salt> In the head.');
+
+    const addListInMain = (noListItems) => {
+      const mainElement = document.querySelector('main');
+      const ulElement = document.createElement('ul');
+      const ulParent = mainElement.appendChild(ulElement);      
+     
+      for (let i = 0; i < noListItems; i++) {
+        const liElement = document.createElement('li');
+        ulParent.appendChild(liElement).innerHTML = `List item ${i + 1}`;
+      }      
+    };
+
+    const removeDiv = (divId) => {
+      // const divToRemove = document.querySelector(`#${divId}`);
+      // document.querySelector('main').removeChild(divToRemove);
+      const divToRemove = document.querySelector(`div#${divId}`);
+      if (divToRemove) {
+        divToRemove.remove();
+      }      
+    }
   </script>
 </head>
 <body>
@@ -18,13 +38,34 @@
     console.log('salt> Start of body');
   </script>
   <main>
-    <div>Lorem, ipsum dolor.</div>
-    <div>Vitae, numquam tenetur.</div>
-    <div>Dolorem, laborum ut?</div>
+    <!-- <div>Lorem, ipsum dolor.</div>
+    <div id="companyName">Vitae, numquam tenetur.</div>
+    <div>Dolorem, laborum ut?</div> -->
+    <div name="content" class="big bold bright">Content 1</div>
+    <div id="companyName" class="big bold">Content 2</div>
+    <div name="content" class="big">Content 3</div>
   </main>
 </body>
 <script>
-  name = getCompanyName();
-  console.log(`salt> End of body. Company name is ${name}`);
+  const companyName = myFunctions.getCompanyName();
+  // document.getElementsByTagName('div')[1].innerHTML = companyName;
+  // document.getElementById('companyName').innerHTML = companyName;
+  // console.log(`salt> End of body. Company name is ${companyName}`);
+  // const boldNodes = document.getElementsByClassName('bold');
+  
+  // for (let i = 0; i < boldNodes.length; i++) {
+  //   boldNodes[i].innerHTML += ' ... and bold';
+  // }  
+  const companyNameElement = document.querySelector('#companyName');
+  companyNameElement.innerHTML = companyName + ' set using a query selector by id';
+  const boldNodesQuerySelected = document.querySelectorAll('.bold');
+
+  for (let i = 0; i < boldNodesQuerySelected.length; i++) {
+    boldNodesQuerySelected[i].innerHTML += ' ... and bold selected with query';
+  }
+
+  addListInMain(10);
+
+  removeDiv('companyName');
 </script>
 </html>

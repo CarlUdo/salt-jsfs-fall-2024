@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Positioning playground</title>
+  <style>
+    main {
+      border: 1px solid black;
+      position: relative;
+      height: 8000px;
+    }
+
+    div {
+      background-color: cadetblue;
+      width: 100px;
+      height: 50px;
+      margin: 10px;
+      padding: 4px;
+      border: 1px solid black;
+    }
+
+    .relativePositioning { /* positioned relative to its normal (static) position */
+      position: relative;
+      top: -100px;
+      left: 900px;
+    }
+
+    .fixedPositioning { /* positioned fixed relative to the viewport (screen) */
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+    }
+
+    .absolutePositioning { /* positioned relative to the nearest positioned ancestor */
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+    }
+
+    .stickyPositioning {
+      position: sticky;
+      top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div>Content 1</div>
+    <div class="relativePositioning">Content 2</div>
+    <div class="fixedPositioning">Content 3</div>
+    <div class="absolutePositioning">Content 4</div>
+    <div class="stickyPositioning">Content 5</div>
+  </main>
+</body>
+</html>

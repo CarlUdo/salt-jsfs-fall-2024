@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    const getUsers = htmlElement => {     
+      fetch('https://randomuser.me/api/?gender=female&results=30')
+        .then(response => response.json())
+        /* .then(data => htmlElement.innerHTML = data.results.length ); */
+        .then(data => {
+          data.results.forEach((user, index) => {
+            const name = `${user.name.title} ${user.name.first} ${user.name.last}`;
+            const picture = user.picture.thumbnail;
+           
+            divElement = document.createElement('div');
+            divElement.setAttribute('id', `index_${index + 1}`);
+
+            const h2Element = document.createElement('h2');
+            h2Element.innerHTML = name;            
+            divElement.appendChild(h2Element);
+
+            const imgElement = document.createElement('img');
+            imgElement.setAttribute('src', picture);
+            divElement.appendChild(imgElement);
+
+            htmlElement.appendChild(divElement);
+          });
+        })
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const mainElement = document.querySelector('main');
+      getUsers(mainElement); 
+    });       
+  </script>
+</head>
+<body>
+  <main></main>  
+</body>
+</html>

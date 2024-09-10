@@ -14,17 +14,21 @@
             const name = `${user.name.title} ${user.name.first} ${user.name.last}`;
             const picture = user.picture.thumbnail;
            
+            // div element
             divElement = document.createElement('div');
             divElement.setAttribute('id', `index_${index + 1}`);
 
+            // h2 element
             const h2Element = document.createElement('h2');
             h2Element.innerHTML = name;            
-            divElement.appendChild(h2Element);
+            divElement.appendChild(document.createElement('h2'));
 
+            // img element
             const imgElement = document.createElement('img');
             imgElement.setAttribute('src', picture);
             divElement.appendChild(imgElement);
 
+            // append to main tag
             htmlElement.appendChild(divElement);
           });
         })

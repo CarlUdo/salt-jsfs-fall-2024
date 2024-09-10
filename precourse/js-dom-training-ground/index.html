@@ -15,12 +15,12 @@
     const addListInMain = (noListItems) => {
       const mainElement = document.querySelector('main');
       const ulElement = document.createElement('ul');
-      const ulParent = mainElement.appendChild(ulElement);      
-     
+      const ulParent = mainElement.appendChild(ulElement);     
+
       for (let i = 0; i < noListItems; i++) {
         const liElement = document.createElement('li');
         ulParent.appendChild(liElement).innerHTML = `List item ${i + 1}`;
-      }      
+      }  
     };
 
     const removeDiv = (divId) => {

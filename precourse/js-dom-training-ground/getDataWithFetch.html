@@ -3,44 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Get data with fetch</title>
   <script>
-    const getUsers = htmlElement => {     
+    const simpleSearch = (searchTerm, name) => name.includes(searchTerm);
+
+    const writeElementToDom = (htmlElement, name, picture) => {
+      // div element
+      divElement = document.createElement('div');
+
+      // h2 element
+      const h2Element = document.createElement('h2');
+      h2Element.innerHTML = name;            
+      divElement.appendChild(h2Element);
+
+      // img element
+      const imgElement = document.createElement('img');
+      imgElement.setAttribute('src', picture);
+      divElement.appendChild(imgElement);
+
+      // append to main tag
+      htmlElement.appendChild(divElement);
+    };
+
+    const getUsers = () => { 
+      const mainlement = document.querySelector('main');
+      const peopleDivElement = document.getElementById("peopleDiv");
+
+      // Make sure page is cleared before new search results are presented
+      peopleDivElement.innerHTML = '';
+
+      // Add "searching..." text on page when searching for people
+      const pElement = document.getElementById('searchText');
+      pElement.innerHTML = 'Searching...';
+
+      const searchTerm = document.getElementById("searchBar").value;   
+      
+      let counter = 0;
+
       fetch('https://randomuser.me/api/?gender=female&results=30')
         .then(response => response.json())
-        /* .then(data => htmlElement.innerHTML = data.results.length ); */
         .then(data => {
           data.results.forEach((user, index) => {
             const name = `${user.name.title} ${user.name.first} ${user.name.last}`;
-            const picture = user.picture.thumbnail;
-           
-            // div element
-            divElement = document.createElement('div');
-            divElement.setAttribute('id', `index_${index + 1}`);
+            const picture = user.picture.thumbnail;      
 
-            // h2 element
-            const h2Element = document.createElement('h2');
-            h2Element.innerHTML = name;            
-            divElement.appendChild(document.createElement('h2'));
-
-            // img element
-            const imgElement = document.createElement('img');
-            imgElement.setAttribute('src', picture);
-            divElement.appendChild(imgElement);
-
-            // append to main tag
-            htmlElement.appendChild(divElement);
+            if (simpleSearch(searchTerm, name) || searchTerm.length === 0) {
+              writeElementToDom(peopleDivElement, name, picture);
+              counter++;
+            }
           });
+          // Show number of people found when searching for people is done
+          const person = counter === 1 ? 'person' : 'persons';
+          pElement.innerHTML = `We found ${counter} ${person} matching your search term "${searchTerm}".`;
         })
-    };
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const mainElement = document.querySelector('main');
-      getUsers(mainElement); 
-    });       
+    }      
   </script>
 </head>
 <body>
-  <main></main>  
+  <main>
+    <input id="searchBar" type="text" placeholder="Enter search term">
+    <button onclick="getUsers()">Search</button>
+    <p id="searchText"></p>
+    <div id="peopleDiv"></div>    
+  </main>  
 </body>
 </html>

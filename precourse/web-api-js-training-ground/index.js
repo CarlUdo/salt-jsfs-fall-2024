@@ -1,26 +1,78 @@
 import http from 'http';
-import fs from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 
 const server = http.createServer((req, res) => {
   const url = req.url;
 
-  const regex = /^\/static\/.*/;
+  res.statusCode = 200;
 
-  if (regex.test(url) || url === '/static' || url === '/'/*  || url === '/favicon.ico' */) {
-    res.statusCode = 200;
+  res.setHeader('Content-type', 'text/html');
+
+  const staticFolder = '/static';
+
+  let htmlPage = ''; 
+
+  if (url === '/' || url === staticFolder || url === `${staticFolder}/`) {
+    htmlPage = readFileSync(`.${staticFolder}/index.html`, { encoding: 'utf-8'});
+    return res.end(htmlPage);
+  }  
   
-    res.setHeader('Content-type', 'text/html');
-  
-    const htmlPage = fs.readFileSync(`./static/index.html`, { encoding: 'utf-8'});
-    
-    res.end(htmlPage);
-  } else {
+  const pageNotFound = res => {
     res.statusCode = 404;
-    
-    res.setHeader('Content-type', 'text/plain');
+    htmlPage = readFileSync(`.${staticFolder}/404.html`, { encoding: 'utf-8'});
+    return res.end(htmlPage);
+  };  
 
-    res.end('');
+  const checkUrl = (url, validRegex) => {
+    const urlObj = {
+      validUrl: false,
+      fileNameInUrl: '',
+    };
+
+    let fileNameInUrl = '';
+    
+    const restOfUrl = url.match(validRegex)[1];
+
+    if (!restOfUrl.includes('/') || (restOfUrl.includes('/') && restOfUrl.split('/')[1] === '')) {
+      if (restOfUrl.includes('/')) {
+        fileNameInUrl = restOfUrl.split('/')[0];
+      } else {        
+        fileNameInUrl = restOfUrl;
+      }
+
+      const fileNamesOnServer = readdirSync(`./${staticFolder}`);
+
+      if (fileNameInUrl.includes('.')) { 
+        for (let i = 0; i < fileNamesOnServer.length; i++) {          
+          if (fileNameInUrl === fileNamesOnServer[i]) {
+            urlObj.validUrl = true;
+            urlObj.fileNameInUrl = fileNameInUrl;
+            break;
+          }
+        }
+      } else {
+        if (fileNameInUrl === 'index') {
+          urlObj.validUrl = true;
+          urlObj.fileNameInUrl = 'index.html';
+        }
+      }
+    } 
+
+    return urlObj;
+  };
+
+  const regex = /^\/static\/(.*)/;
+
+  if (regex.test(url)) {    
+    const { validUrl, fileNameInUrl } = checkUrl(url, regex);
+
+    if (validUrl) {
+      htmlPage = readFileSync(`.${staticFolder}/${fileNameInUrl}`, { encoding: 'utf-8'});
+      return res.end(htmlPage);
+    }        
   }
+
+  pageNotFound(res);
 });
 
 const hostName = 'localhost';

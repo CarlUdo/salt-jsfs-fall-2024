@@ -3,8 +3,10 @@ import fs from 'fs';
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
-  res.setHeader('Content-type', 'text/plain');
-  const htmlPage = fs.readFileSync('./static/index.html', { encoding: 'utf-8'});
+  
+  const header = res.setHeader('Content-type', 'text/html');
+  
+  const htmlPage = fs.readFileSync(`./static/index.html`, { encoding: 'utf-8'});
   res.end(htmlPage);
 });
 

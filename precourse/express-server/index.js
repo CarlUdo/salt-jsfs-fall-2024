@@ -10,7 +10,8 @@ app.get('/', (req, res) => {
     name: 'John Doe',
     email: 'john@doe.com'
   }
-  res.json(dev);
+
+  res.status(201).set('location', '/api/developers/1').json(dev);
 });
 
 app.listen(port, hostName, () => {

@@ -17,16 +17,20 @@ const db = [
   },
 ];
 
-const getUser = id => {
-  for (let i = 0; i < db.length; i++) {
-    if (id === db[i].id) {      
-      return db[i];
-    }  
-  }
+// const getUser = id => {
+//   for (let i = 0; i < db.length; i++) {
+//     if (id === db[i].id) {      
+//       return db[i];
+//     }  
+//   }
 
-  return {
-    error: `No user with id ${id} exists in database.`
-  };
+//   return {
+//     error: `No user with id ${id} exists in database.`
+//   };
+// };
+
+const getUser = id => {
+  return db.find(user => user.id === id);
 };
 
 app.get('/api/developers', (req, res) => {
@@ -38,9 +42,9 @@ app.get('/api/developers/:id', (req, res) => {
 
   const user = getUser(Number(id));
 
-  const statusCode = user.error ? 404 : 200;
+  const statusCode = user ? 200 : 404;
 
-  res.status(statusCode).json(user);
+  res.status(statusCode).json(statusCode === 200 ? user : { error: `No user with id ${id} exists in database.` });
 });
 
 app.listen(port, hostName, () => {

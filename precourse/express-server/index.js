@@ -4,8 +4,13 @@ const app = express();
 const hostName = 'localhost';
 const port = 3000;
 
-app.use('/', (req, res) => {
-  res.send('Welcome Salty');
+app.get('/', (req, res) => {
+  const dev = {
+    id: 1,
+    name: 'John Doe',
+    email: 'john@doe.com'
+  }
+  res.json(dev);
 });
 
 app.listen(port, hostName, () => {

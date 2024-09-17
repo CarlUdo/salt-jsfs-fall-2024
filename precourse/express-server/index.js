@@ -9,8 +9,18 @@ const app = express();
 const port = 3000;
 const hostName = 'localhost';
 
+// Middleware for logging in the console
+const saltLogger = (req, res, next) => {
+  console.log(`salt> ${req.method} - ${req.url}`)
+  next();
+};
+
+app.use(saltLogger);
+
 // Serve static files from the 'static' directory
 app.use(express.static(path.join(__dirname, 'static')));
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello fellow developer!');

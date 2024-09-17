@@ -4,14 +4,21 @@ const app = express();
 const hostName = 'localhost';
 const port = 3000;
 
-app.get('/', (req, res) => {
-  const dev = {
+const db = [
+  {
     id: 1,
     name: 'John Doe',
     email: 'john@doe.com'
-  }
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    email: 'jane@doe.com'
+  },
+];
 
-  res.status(201).set('location', '/api/developers/1').json(dev);
+app.get('/api/developers', (req, res) => {
+  res.json(db);
 });
 
 app.listen(port, hostName, () => {

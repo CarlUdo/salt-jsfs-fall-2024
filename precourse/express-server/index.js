@@ -1,6 +1,6 @@
 import express from "express";
+import { app } from './api.js';
 
-const app = express();
 const hostName = 'localhost';
 const port = 3000;
 

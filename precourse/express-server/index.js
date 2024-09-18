@@ -62,6 +62,16 @@ const deleteUser = id => {
   return false;
 };
 
+const updateUser = (id, updates) => {  
+  for (let i = 0; i < db.length; i++) {
+    if (id === db[i].id) {
+      return db[i] = { ...db[i], ...updates };
+    }
+  }
+
+  return false;
+};
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -99,6 +109,14 @@ app.delete('/api/developers/:id', (req, res) => {
   const isSuccessful = deleteUser(Number(id));
 
   isSuccessful ? res.status(204).send() : res.status(404).send({ error: `No user with id ${id} exists in database.` });  
+});
+
+app.patch('/api/developers/:id', (req, res) => {
+  const { id } = req.params;
+
+  const user = updateUser(Number(id), req.body);
+
+  user ? res.status(200).json(user) : res.status(404).send({ error: `No user with id ${id} exists in database.` });  
 });
 
 app.listen(port, hostName, () => {

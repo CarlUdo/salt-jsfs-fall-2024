@@ -33,6 +33,10 @@ const getUser = id => {
   return db.find(user => user.id === id);
 };
 
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome Salty!</h1>');
+});
+
 app.get('/api/developers', (req, res) => {
   res.json(db);
 });

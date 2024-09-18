@@ -12,4 +12,13 @@ describe('developer API should have endpoints too', () => {
       .expect(res => strictEqual(res.body.length, 2))
       .expect(200, done);
   });
+
+  it('get user with id 1', done => {
+    request(app)
+      .get('/api/developers/1')
+      .set('Application', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(res => strictEqual(res.body.name, 'John Doe'))
+      .expect(200, done);
+  });
 });

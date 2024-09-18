@@ -51,6 +51,17 @@ const addUser = user => {
   return newUser;
 };
 
+const deleteUser = id => {
+  for (let i = 0; i < db.length; i++) {
+    if (id === db[i].id) {
+      db.splice(i, 1);
+      return true;
+    }
+  }
+
+  return false;
+};
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -80,6 +91,14 @@ app.post('/api/developers/', (req, res) => {
   }
 
   res.status(201).set('Location', `/api/developers/${newUser.id}`).json(newUser);
+});
+
+app.delete('/api/developers/:id', (req, res) => {
+  const { id } = req.params;
+
+  const isSuccessful = deleteUser(Number(id));
+
+  isSuccessful ? res.status(204).send() : res.status(404).send({ error: `No user with id ${id} exists in database.` });  
 });
 
 app.listen(port, hostName, () => {

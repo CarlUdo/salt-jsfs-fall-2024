@@ -33,6 +33,9 @@ const getUser = id => {
   return db.find(user => user.id === id);
 };
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('<h1>Welcome Salty!</h1>');
 });
@@ -49,6 +52,11 @@ app.get('/api/developers/:id', (req, res) => {
   const statusCode = user ? 200 : 404;
 
   res.status(statusCode).json(statusCode === 200 ? user : { error: `No user with id ${id} exists in database.` });
+});
+
+app.post('/api/developers/', (req, res) => {
+  console.log(req.body);
+  res.status(201).send();
 });
 
 app.listen(port, hostName, () => {

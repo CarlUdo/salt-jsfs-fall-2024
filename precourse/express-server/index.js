@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Welcome Salty!</h1>');
 });
 
-app.get('/api/developers', (req, res) => {
+app.get('/api/developers/', (req, res) => {
   res.json(db);
 });
 

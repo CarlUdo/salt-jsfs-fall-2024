@@ -33,6 +33,24 @@ const getUser = id => {
   return db.find(user => user.id === id);
 };
 
+const addUser = user => {
+  if (!user.name) return { error: `Property "name" is missing` };
+  if (!user.email) return { error: `Property "email" is missing` };
+  
+  const highestID = db[db.length - 1].id;
+  const newId = highestID + 1;
+
+  const newUser = {
+    id: newId,
+    name: user.name,
+    email: user.email,
+  };
+
+  db.push(newUser);
+
+  return newUser;
+};
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -55,8 +73,13 @@ app.get('/api/developers/:id', (req, res) => {
 });
 
 app.post('/api/developers/', (req, res) => {
-  console.log(req.body);
-  res.status(201).send();
+  const newUser = addUser(req.body);
+
+  if (newUser.error) {
+    res.status(400).json({ error: newUser.error});
+  }
+
+  res.status(201).set('Location', `/api/developers/${newUser.id}`).json(newUser);
 });
 
 app.listen(port, hostName, () => {

@@ -62,10 +62,10 @@ const deleteUser = id => {
   return false;
 };
 
-const updateUser = (id, updates) => {  
+const updateUser = (id, update) => {  
   for (let i = 0; i < db.length; i++) {
     if (id === db[i].id) {
-      return db[i] = { ...db[i], ...updates };
+      return db[i] = { ...db[i], ...update };
     }
   }
 
@@ -112,6 +112,14 @@ app.delete('/api/developers/:id', (req, res) => {
 });
 
 app.patch('/api/developers/:id', (req, res) => {
+  const { id } = req.params;
+
+  const user = updateUser(Number(id), req.body);
+
+  user ? res.status(200).json(user) : res.status(404).send({ error: `No user with id ${id} exists in database.` });  
+});
+
+app.put('/api/developers/:id', (req, res) => {
   const { id } = req.params;
 
   const user = updateUser(Number(id), req.body);

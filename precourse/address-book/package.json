@@ -2,7 +2,7 @@
   "name": "address-book",
   "version": "1.0.0",
   "main": "app.ts",
-  "type": "module",
+
   "scripts": {
     "build": "npx tsc",
     "dev": "npx ts-node src/app.ts"

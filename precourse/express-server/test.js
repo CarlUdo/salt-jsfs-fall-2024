@@ -47,4 +47,17 @@ describe('developer API should have endpoints too', () => {
       .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
       .expect(200, done)
   });
+
+  it('update user', done => {
+    request(app)
+      .put('/api/developers/1')
+      .send({
+        "name": "Carl Bieneck",
+        "email": "carl@bieneck.com"
+      })
+      .set('Accept', 'application/json')
+      .expect(res => strictEqual(res.body.name, 'Carl Bieneck'))
+      .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
+      .expect(200, done)
+  });
 });

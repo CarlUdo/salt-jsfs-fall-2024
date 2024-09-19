@@ -1,4 +1,4 @@
-import { strictEqual }from 'assert';
+import { strictEqual } from 'assert';
 import request from 'supertest';
 import { app } from './api.js'
 
@@ -34,5 +34,17 @@ describe('developer API should have endpoints too', () => {
       .expect('Location', /\/api\/developers\/3/)
       .expect(res => strictEqual(res.body.name, 'Carl'))
       .expect(201, done)
-  })
+  });
+
+  it('update user partially', done => {
+    request(app)
+      .patch('/api/developers/1')
+      .send({
+        "email": "carl@bieneck.com"
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
+      .expect(200, done)
+  });
 });

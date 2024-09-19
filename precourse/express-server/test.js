@@ -60,4 +60,11 @@ describe('developer API should have endpoints too', () => {
       .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
       .expect(200, done)
   });
+
+  it('delete user', done => {
+    request(app)
+      .delete('/api/developers/1')
+      .set('Accept', 'application/json')
+      .expect(204, done)
+  })
 });

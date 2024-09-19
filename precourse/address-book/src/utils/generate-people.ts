@@ -18,7 +18,6 @@ export const generatePeople = (numberOfPersons: number) => {
     };
   };
 
-
   return faker.helpers.multiple(createRandomUser, {
     count: numberOfPersons,
   });

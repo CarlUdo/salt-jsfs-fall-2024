@@ -75,7 +75,7 @@ const server = http.createServer((req, res) => {
   pageNotFound(res);
 });
 
-const hostName = 'localhost';
+const hostName = '0.0.0.0';
 const port = 3000;
 
 server.listen(port, hostName, () => {

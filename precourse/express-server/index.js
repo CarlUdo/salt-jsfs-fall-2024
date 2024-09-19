@@ -1,7 +1,7 @@
 import express from "express";
 import { app } from './api.js';
 
-const hostName = 'localhost';
+const hostName = '0.0.0.0';
 const port = 3000;
 
 const db = [

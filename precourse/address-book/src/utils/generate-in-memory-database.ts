@@ -1,5 +1,5 @@
 import { generatePeople } from "./generate-people";
-import { writeFileSync } from 'fs'
+import { writeFileSync } from 'fs';
 import { PROJECT_CONFIG } from "../config/project-config";
 
 const { rootPath } = PROJECT_CONFIG;
@@ -7,8 +7,8 @@ const { rootPath } = PROJECT_CONFIG;
 export const generateInMemoryDatabase = (numberOfPersons: number) => {
   const db = generatePeople(numberOfPersons);
 
-  const dbJsonString = JSON.stringify(db, null, 2);
-
+  const dbJsonString = `export const db = ${JSON.stringify(db, null, 2)};\n`;
+ 
   try {
     writeFileSync(`${rootPath}/src/database/people-database.ts`, dbJsonString, 'utf8');
   } catch (err) {

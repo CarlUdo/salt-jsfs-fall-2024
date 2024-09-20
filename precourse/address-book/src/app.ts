@@ -7,11 +7,11 @@ generateInMemoryDatabase(100); // Generates a db for development purposes
 const app = express();
 
 const host = '0.0.0.0';
-const port = 3000;
+const PORT = Number(process.env.LOCAL_HOST_PORT) || 4001;
       
 app.get('/', (req: Request, res: Response) => {
   res.send(`<h1>Welcome to this address application!</h1>`);
 });
 
-app.listen(port, host, () => 
-  console.log(`Server is listening to http://${host}/${port}`));
+app.listen(PORT, host, () => 
+  console.log(`Server is listening to http://${host}/${PORT}`));

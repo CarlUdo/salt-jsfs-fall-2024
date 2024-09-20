@@ -1,8 +1,5 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
-
-const db = generateInMemoryDatabase(100);
 
 const app = express();
 

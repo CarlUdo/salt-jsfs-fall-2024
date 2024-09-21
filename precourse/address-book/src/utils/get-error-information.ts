@@ -12,6 +12,6 @@ export const getErrorInformation = (err: any) => {
     name: err.name ?? 'Unknown error name',
     message: err.message ?? 'Unknown error message',
     type: err.type ?? 'Unknown error type',
-    stack: err.stack ?? '',
+    stack: err.stack ?? ''
   } as ErrorInfo;
 };

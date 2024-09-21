@@ -1,5 +1,5 @@
 import express from 'express';
-import { usersRouter } from './routes/users';
+import { peopleRouter } from './routes/people-router';
 import { errorHandler } from './middlewares/error-handler';
 import morgan from 'morgan';
 import path from 'path';
@@ -19,7 +19,7 @@ app.use(express.json({ limit: '5mb' }));
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.use('/users', usersRouter);  
+app.use('/users', peopleRouter);  
 
 app.use(wrongRoute);
 

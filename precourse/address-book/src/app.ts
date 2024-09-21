@@ -19,7 +19,7 @@ app.use(express.json({ limit: '5mb' }));
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.use('/users', peopleRouter);  
+app.use('/people', peopleRouter);  
 
 app.use(wrongRoute);
 

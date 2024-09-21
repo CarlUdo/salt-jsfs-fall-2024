@@ -1,10 +1,10 @@
 import express from 'express';
-//import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
 import { usersRouter } from './routes/users';
-import checkReqSize from './middlewares/check-req-size';
+import { checkReqSize } from './middlewares/check-req-size';
 import { errorHandler } from './middlewares/error-handler';
-
-// generateInMemoryDatabase(100); // Generates a db for development purposes. Uncomment to generate a database
+// Uncomment below to generate a database for development purposes
+/* import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
+generateInMemoryDatabase(100);  */ 
 
 const app = express();
 

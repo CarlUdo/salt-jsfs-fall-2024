@@ -1,7 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
+import { CustomError } from "../classes/Errors";
 
-export const errorHandler = (err: Error, req: Request, res: Response) => {
-  console.log(err);
+// Note! Even though next function isn't used it must come as a parameter or strange behaviour will occur
+export const errorHandler = (err: CustomError, req: Request, res: Response, next: NextFunction) => {
+  const statusCode = err.statusCode || 500; 
 
-  res.status(500).json({ message: err.message });
+  console.log(`${err.name} (${statusCode}): ${err.message}`);
+
+  res.status(statusCode).json({ message: err.message });
 };

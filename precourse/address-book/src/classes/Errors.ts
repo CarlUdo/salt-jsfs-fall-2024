@@ -30,17 +30,3 @@ export class PayloadTooLarge extends CustomError {
     super(message, cause);
   }
 };
-
-
-// class CustomError extends Error {
-//   constructor(message: string, cause?: Error) {
-//       super(message);
-//       this.name = this.constructor.name; // Set the name property
-//       Object.setPrototypeOf(this, new.target.prototype); // Correct prototype chain
-//       if (cause) {
-//           this.cause = cause;
-//       }
-//   }
-
-//   cause?: Error;
-// }

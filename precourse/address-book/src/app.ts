@@ -11,9 +11,7 @@ const app = express();
 const host = '0.0.0.0';
 const PORT = Number(process.env.LOCAL_HOST_PORT) || 4001;
 
-app.use(checkReqSize);
-      
-app.use('/users', usersRouter);  
+app.use(express.json({ limit: '5mb' }));
 
 app.use(errorHandler);
 

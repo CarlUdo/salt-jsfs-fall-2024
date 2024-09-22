@@ -1,17 +1,28 @@
 import { db } from "../database/people-database";
-import type { Person } from "./types";
+import { isPerson, isPersonProperties } from "./type-guards";
+import type { CompletePerson, Person } from "./types";
 import { faker } from "@faker-js/faker";
 
 export const findPersonInDb = (id: string) => db.find(user => user.userId === id);
 
 export const createPersonInDb = (person: Person) => {
-  if (!person.fullName) return { error: `Property "fullName" is missing` };
-  if (!person.email) return { error: `Property "email" is missing` };
-  if (!person.address) return { error: `Property "address" is missing` };
+  if (!isPerson(person)) return { error: `The person you're trying to create is of invalid format: ${person}` };
 
   const createdPerson = { userId: faker.string.uuid(), ...person };
 
   db.push(createdPerson);
 
   return createdPerson; 
+};
+
+export const updatePersonInDb = (id: string, person: Partial<CompletePerson>) => {
+  if (!isPersonProperties(person)) return { error: `One or several properties are wrong: ${person}` };
+
+  for (let i = 0; i < db.length; i++) {
+    if (id === db[i].userId) {
+      return db[i] = { ...db[i], ...person };
+    }
+  }
+
+  return { error: `Person with id ${id} couldn't be found` };
 };

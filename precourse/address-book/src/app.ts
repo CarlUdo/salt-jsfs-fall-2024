@@ -5,8 +5,8 @@ import morgan from 'morgan';
 import path from 'path';
 import { wrongRoute } from './middlewares/wrong-route';
 // Uncomment below to generate a database for development purposes
-import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
-generateInMemoryDatabase(100);  
+// import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
+// generateInMemoryDatabase(100);  
 
 const app = express();
 

@@ -5,6 +5,7 @@ export const generatePeople = (numberOfPersons: number) => {
     return {
       userId: faker.string.uuid(),
       fullName: faker.person.fullName(),
+      email: faker.internet.email(),
       address: faker.location.streetAddress(),
       phoneNumber: faker.phone.number({ style: 'international' }),
       age: faker.number.int({ min: 10, max: 100 }), 
@@ -12,13 +13,12 @@ export const generatePeople = (numberOfPersons: number) => {
       zodiacSign: faker.person.zodiacSign(),
       favoriteDish: faker.food.dish(),
       pet: faker.animal.type(),
-      bio: faker.person.bio(),
-      email: faker.internet.email(),
-      avatar: faker.image.avatar(),
+      bio: faker.person.bio(),      
+      avatar: faker.image.avatar()
     };
   };
 
   return faker.helpers.multiple(createRandomUser, {
-    count: numberOfPersons,
+    count: numberOfPersons
   });
 };

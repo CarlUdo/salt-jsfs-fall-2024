@@ -7,7 +7,10 @@ const { rootPath } = PROJECT_CONFIG;
 export const generateInMemoryDatabase = (numberOfPersons: number) => {
   const db = generatePeople(numberOfPersons);
 
-  const dbJsonString = `export const db = ${JSON.stringify(db, null, 2)};\n`;
+  const importExportString = 'import type { CreatedPerson } from "../utils/types"\n\n' +
+    'export const db: CreatedPerson[] = '
+
+  const dbJsonString = `${importExportString}${JSON.stringify(db, null, 2)};\n`;
  
   try {
     writeFileSync(`${rootPath}/src/database/people-database.ts`, dbJsonString, 'utf8');

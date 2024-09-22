@@ -13,5 +13,7 @@ export const getPerson = ((req: Request, res: Response) => {
 
   const statusCode = user ? 200 : 404;
 
-  res.status(statusCode).json(statusCode === 200 ? user : { error: `No user with id ${id} exists in database.` });  
+  const response = user ?? { error: `No user with id ${id} exists in database.` };
+
+  res.status(statusCode).json(response);  
 });  

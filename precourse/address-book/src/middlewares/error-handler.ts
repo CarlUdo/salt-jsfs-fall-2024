@@ -7,8 +7,6 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
   try {
     const errorInformation = getErrorInformation(err);
 
-    console.log(errorInformation);
-
     res.status(errorInformation.status).json({ message: errorInformation.message });
 
     writeToLogFile(errorInformation);

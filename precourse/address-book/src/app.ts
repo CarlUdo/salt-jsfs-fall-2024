@@ -8,21 +8,27 @@ import { wrongRoute } from './middlewares/wrong-route';
 // import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
 // generateInMemoryDatabase(100);  
 
-const app = express();
+(async () => {
+  const rfs = await import('rotating-file-stream');
+  
+  const app = express();
 
-const host = '0.0.0.0';
-const PORT = Number(process.env.LOCAL_HOST_PORT) || 4001;
+  const host = '0.0.0.0';
+  const PORT = Number(process.env.LOCAL_HOST_PORT) || 4001;
 
-app.use(morgan('tiny'));
+  app.use(morgan('tiny'));
 
-app.use(express.json({ limit: '5mb' }));
+  app.use(express.json({ limit: '5mb' }));
 
-app.use(express.static(path.join(__dirname, 'static')));
+  app.use(express.static(path.join(__dirname, 'static')));
 
-app.use('/api/people', peopleRouter);  
+  app.use('/api/people', peopleRouter);  
 
-app.use(wrongRoute);
+  app.use(wrongRoute);
 
-app.use(errorHandler);
+  app.use(errorHandler);
 
-app.listen(PORT, host, () => console.log(`Server is listening to http://${host}/${PORT}`));
+  app.listen(PORT, host, () => console.log(`Server is listening to http://${host}/${PORT}`));
+})();
+
+

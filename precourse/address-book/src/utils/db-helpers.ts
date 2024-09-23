@@ -15,8 +15,20 @@ export const createPersonInDb = (person: Person) => {
   return createdPerson; 
 };
 
-export const updatePersonInDb = (id: string, person: Partial<CompletePerson>) => {
+export const updatePersonPartitialInDb = (id: string, person: Partial<CompletePerson>) => {
   if (!isPersonProperties(person)) return { error: `One or several properties are wrong: ${person}` };
+
+  for (let i = 0; i < db.length; i++) {
+    if (id === db[i].userId) {
+      return db[i] = { ...db[i], ...person };
+    }
+  }
+
+  return { error: `Person with id ${id} couldn't be found` };
+};
+
+export const updatePersonInDb = (id: string, person: Person) => {
+ if (!isPerson(person)) return { error: `Person is of wrong type: ${person}` };
 
   for (let i = 0; i < db.length; i++) {
     if (id === db[i].userId) {

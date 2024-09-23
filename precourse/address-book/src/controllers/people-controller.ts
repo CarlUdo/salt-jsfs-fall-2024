@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { db } from '../database/people-database';
-import { createPersonInDb, findPersonInDb, updatePersonInDb } from '../utils/db-helpers';
+import { createPersonInDb, findPersonInDb, updatePersonInDb, updatePersonPartitialInDb } from '../utils/db-helpers';
 import { isCreatedPerson } from '../utils/type-guards';
 
 export const getPeople = ((req: Request, res: Response) => {
@@ -28,12 +28,22 @@ export const createPerson = ((req: Request, res: Response) => {
   res.status(400).json({ error: createdPerson.error});
 });
 
+export const updatePersonPartial = ((req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const updatedPerson = updatePersonPartitialInDb(id, req.body);
+
+  if (isCreatedPerson(updatedPerson)) return res.status(200).json(updatedPerson);  
+  
+  res.status(400).json({ error: updatedPerson.error});
+});
+
 export const updatePerson = ((req: Request, res: Response) => {
   const { id } = req.params;
 
-  const createdPerson = updatePersonInDb(id, req.body);
+  const updatedPerson = updatePersonInDb(id, req.body);
 
-  if (isCreatedPerson(createdPerson)) return res.status(200).json(createdPerson);  
+  if (isCreatedPerson(updatedPerson)) return res.status(200).json(updatedPerson);  
   
-  res.status(400).json({ error: createdPerson.error});
+  res.status(400).json({ error: updatedPerson.error});
 });

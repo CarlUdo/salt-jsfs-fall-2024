@@ -4,7 +4,7 @@ import { errorHandler } from './middlewares/error-handler';
 import morgan from 'morgan';
 import path from 'path';
 import { wrongRoute } from './middlewares/wrong-route';
-// Uncomment below to generate a database for development purposes
+// --- Uncomment below to generate a database for development purposes --- //
 // import { generateInMemoryDatabase } from './utils/generate-in-memory-database';
 // generateInMemoryDatabase(100);  
 
@@ -25,5 +25,4 @@ app.use(wrongRoute);
 
 app.use(errorHandler);
 
-app.listen(PORT, host, () => 
-  console.log(`Server is listening to http://${host}/${PORT}`));
+app.listen(PORT, host, () => console.log(`Server is listening to http://${host}/${PORT}`));

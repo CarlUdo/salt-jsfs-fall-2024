@@ -1,10 +1,4 @@
-type ErrorInfo = {
-  status: number;
-  name: string;
-  message: string;
-  type: string;
-  stack: string;
-};
+import type { ErrorInfo } from "./types";
 
 export const getErrorInformation = (err: any) => {
   return {

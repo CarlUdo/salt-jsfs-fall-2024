@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getErrorInformation } from "../utils/get-error-information";
+import { writeToLogFile } from "../utils/write-to-log-file";
 
 // Note! Even though next function isn't used it must come as a parameter or strange behaviour will occur
 export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
@@ -9,7 +10,12 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     console.log(errorInformation);
 
     res.status(errorInformation.status).json({ message: errorInformation.message });
+
+    writeToLogFile(errorInformation);
   } catch (err) {
-    console.log(`Error within errorHandler: `, err);
+    console.log('Error within errorHandler: ', err);
+    const errorInformation = getErrorInformation(err);    
+    writeToLogFile(errorInformation);
+    res.status(errorInformation.status).json({ message: errorInformation.message });
   }  
 };

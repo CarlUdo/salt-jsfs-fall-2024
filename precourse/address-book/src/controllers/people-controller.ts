@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { db } from '../database/people-database';
-import { createPersonInDb, findPersonInDb, updatePersonInDb, updatePersonPartitialInDb } from '../utils/db-helpers';
+import { createPersonInDb, deletePersonInDb, findPersonInDb, updatePersonInDb, updatePersonPartitialInDb } from '../utils/db-helpers';
 import { isCreatedPerson } from '../utils/type-guards';
 
 export const getPeople = ((req: Request, res: Response) => {
@@ -46,4 +46,14 @@ export const updatePerson = ((req: Request, res: Response) => {
   if (isCreatedPerson(updatedPerson)) return res.status(200).json(updatedPerson);  
   
   res.status(400).json({ error: updatedPerson.error});
+});
+
+export const deletePerson = ((req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const isPersonDeleted = deletePersonInDb(id);
+
+  if (!isPersonDeleted.error) return res.status(204).send();  
+
+  res.status(404).send({ error: isPersonDeleted.error });
 });

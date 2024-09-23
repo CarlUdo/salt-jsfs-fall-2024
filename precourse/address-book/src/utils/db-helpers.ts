@@ -38,3 +38,14 @@ export const updatePersonInDb = (id: string, person: Person) => {
 
   return { error: `Person with id ${id} couldn't be found` };
 };
+
+export const deletePersonInDb = (id: string) => {
+  for (let i = 0; i < db.length; i++) {
+    if (id === db[i].userId) {
+      db.splice(i, 1);
+      return { deleted: true };
+    }    
+  }
+
+  return { error: `Person with id ${id} couldn't be found` };
+};

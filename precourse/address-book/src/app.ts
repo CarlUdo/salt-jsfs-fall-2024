@@ -38,5 +38,3 @@ const rootPath  = PROJECT_CONFIG.rootPath;
 
   app.listen(PORT, host, () => console.log(`Server is listening to http://${host}/${PORT}`));
 })();
-
-

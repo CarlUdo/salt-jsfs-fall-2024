@@ -1,4 +1,4 @@
-import { CompletePerson, CreatedPerson, Person } from './types';
+import { CompletePerson, CreatedPerson, ErrorInfo, Person } from './types';
 
 export const isPerson = (obj: any): obj is Person => {
   return (
@@ -31,3 +31,14 @@ export const isPersonProperties = (obj: any): obj is Partial<CompletePerson> => 
   
   return hasAtLeastOneProperty && hasOnlyValidProperties;
 };  
+
+export const isErrorInfo = (logObj: ErrorInfo): logObj is ErrorInfo => {
+  return (typeof logObj === 'object' &&
+    logObj !== null &&
+    typeof logObj.status === 'number' && 
+    typeof logObj.name === 'string' && 
+    typeof logObj.message === 'string' && 
+    typeof logObj.type === 'string' && 
+    typeof logObj.stack === 'string' 
+  );    
+};

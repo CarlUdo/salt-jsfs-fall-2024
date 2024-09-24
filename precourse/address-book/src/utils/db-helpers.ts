@@ -1,6 +1,6 @@
 import { db } from "../database/people-database";
 import { isPerson, isPersonProperties } from "./type-guards";
-import type { CompletePerson, Person } from "./types";
+import type { CompletePerson, Person } from "../types/types";
 import { faker } from "@faker-js/faker";
 
 export const findPersonInDb = (id: string) => db.find(user => user.userId === id);

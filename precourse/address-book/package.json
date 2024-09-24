@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register 'src/**/*.spec.ts'",
+    "test": "mocha -r ts-node/register 'tests/**/*.spec.ts'",
     "build": "tsc",
     "dev": "nodemon",
     "lint": "eslint .",

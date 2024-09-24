@@ -3,7 +3,7 @@ import { getLocaleDateObj } from "./date-functions";
 import path from "path";
 import { appendFileSync } from "fs";
 import { getLogMessage } from "./get-log-message";
-import { ErrorInfo } from "./types";
+import { ErrorInfo } from "../types/types";
 
 const { rootPath } = PROJECT_CONFIG;
 

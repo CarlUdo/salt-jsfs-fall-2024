@@ -25,7 +25,7 @@ export const app = express();
 
   app.use(express.json({ limit: '5mb' }));
 
-  app.use(express.static(path.join(__dirname, 'static')));
+  app.use(express.static(path.join(rootPath, 'src', 'static', 'html')));
 
   app.use('/api/people', peopleRouter);  
 

@@ -1,6 +1,6 @@
 import { getLocaleDateObj } from "./date-functions";
 import { isErrorInfo } from "./type-guards";
-import { ErrorInfo } from "./types";
+import { ErrorInfo } from "../types/types";
 
 const divider = `\n-------------------------------------------------------------------------------------\n`;
 

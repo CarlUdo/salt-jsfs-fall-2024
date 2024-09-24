@@ -1,6 +1,7 @@
 import { strictEqual, ok } from "assert";
 import request from "supertest";
-import { app } from "./api";
+import { app } from "../src/api";
+import { describe, it } from 'mocha';
 
 const route = '/api/people/';
 

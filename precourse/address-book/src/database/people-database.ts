@@ -1,4 +1,4 @@
-import type { CreatedPerson } from "../utils/types";
+import type { CreatedPerson } from "../types/types";
 
 export const db: CreatedPerson[] = [
   {

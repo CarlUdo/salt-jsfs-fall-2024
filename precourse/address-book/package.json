@@ -6,7 +6,8 @@
     "build": "tsc",
     "dev": "nodemon",
     "lint": "eslint .",
-    "fix": "npx eslint . --fix"
+    "fix": "eslint . --fix",
+    "seed": "ts-node src/utils/generate-in-memory-database.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generatePeople = void 0;
-const faker_1 = require("@faker-js/faker");
-const generatePeople = (numberOfPersons) => {
-    const createRandomUser = () => {
+var faker_1 = require("@faker-js/faker");
+var generatePeople = function (numberOfPersons) {
+    var createRandomUser = function () {
         return {
             userId: faker_1.faker.string.uuid(),
             fullName: faker_1.faker.person.fullName(),
@@ -24,4 +24,3 @@ const generatePeople = (numberOfPersons) => {
     });
 };
 exports.generatePeople = generatePeople;
-//# sourceMappingURL=generate-people.js.map

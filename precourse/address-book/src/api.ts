@@ -5,18 +5,21 @@ import morgan from 'morgan';
 import path from 'path';
 import { wrongRoute } from './middlewares/wrong-route';
 import { PROJECT_CONFIG } from './config/project-config';
+const { createStream } = require('rotating-file-stream');
 
 const rootPath  = PROJECT_CONFIG.rootPath;
+
+const createLogStream = async () => {
+  return createStream('access.log', {
+    interval: '1d', // rotate daily
+    path:  path.join(rootPath, 'logs', 'common')
+  });
+}
 
 export const app = express();
 
 (async () => {
-  const rfs = await import('rotating-file-stream');
-
-  const logStream = rfs.createStream('access.log', {
-    interval: '1d', // rotate daily
-    path: path.join(rootPath, 'logs', 'common')
-  });
+  const logStream = await createLogStream();
 
   app.use(morgan('combined', { stream: logStream }));
 

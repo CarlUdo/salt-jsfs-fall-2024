@@ -36,7 +36,7 @@ describe('Test the people api to the limits...', () => {
       .expect('Location', /\/api\/developers\//)
       .expect(res => ok(res.body.userId, 'userId property should be present'))
       .expect(res => strictEqual(res.body.fullName, 'Carl Bieneck'))
-      .expect(201, done)
+      .expect(201, done);
   });
 
   it('update person partially', done => {
@@ -48,7 +48,7 @@ describe('Test the people api to the limits...', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
-      .expect(200, done)
+      .expect(200, done);
   });
 
   it('update person fully', done => {
@@ -61,6 +61,13 @@ describe('Test the people api to the limits...', () => {
       })
       .set('Accept', 'application/json')
       .expect(res => strictEqual(res.body.fullName, 'Lilla My'))
-      .expect(200, done)
+      .expect(200, done);
+  });
+
+  it('delete person with a specific userId', done => {
+    request(app)
+      .delete(`${route}065b58ac-e0fe-4d0b-8c70-3fa984f3330c`)
+      .set('Accept', 'application/json')
+      .expect(204, done);
   });
 });

@@ -1,4 +1,4 @@
-import { strictEqual } from "assert";
+import { strictEqual, ok } from "assert";
 import request from "supertest";
 import { app } from "./api";
 
@@ -14,12 +14,28 @@ describe('Test the people api to the limits...', () => {
       .expect(200, done);
   });
 
-  it(`get person with id "a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1"`, done => {
+  it(`get person with userId "a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1"`, done => {
     request(app)
       .get(`${route}a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1`)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(res => strictEqual(res.body.fullName, 'Victor Ernser'))
       .expect(200, done);
+  });
+
+  it('create new person', done => {
+    request(app)
+      .post(`${route}`)
+      .send({
+        "fullName": 'Carl Bieneck',
+        "email": 'carl@wbsweden.com',
+        "address": 'Mumindalen'
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect('Location', /\/api\/developers\//)
+      .expect(res => ok(res.body.userId, 'userId property should be present'))
+      .expect(res => strictEqual(res.body.fullName, 'Carl Bieneck'))
+      .expect(201, done)
   });
 });

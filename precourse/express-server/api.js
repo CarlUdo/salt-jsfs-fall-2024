@@ -1,8 +1,6 @@
 import express from "express";
 
 export const app = express();
-const hostName = 'localhost';
-const port = 3000;
 
 const db = [
   {

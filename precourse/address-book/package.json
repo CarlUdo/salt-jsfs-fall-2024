@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
+    "test": "mocha -r ts-node/register 'src/**/*.spec.ts'",
     "build": "tsc",
     "dev": "nodemon",
     "lint": "eslint .",
@@ -16,12 +17,16 @@
   "devDependencies": {
     "@faker-js/faker": "^9.0.1",
     "@types/express": "^4.17.21",
+    "@types/mocha": "^10.0.8",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.5.5",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
     "eslint": "^9.10.0",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.7",
+    "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },

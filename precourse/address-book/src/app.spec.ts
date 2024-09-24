@@ -38,4 +38,16 @@ describe('Test the people api to the limits...', () => {
       .expect(res => strictEqual(res.body.fullName, 'Carl Bieneck'))
       .expect(201, done)
   });
+
+  it('update person partially', done => {
+    request(app)
+      .patch(`${route}a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1`)
+      .send({
+        "email": "carl@bieneck.com"
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
+      .expect(200, done)
+  });
 });

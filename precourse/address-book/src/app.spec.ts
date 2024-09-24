@@ -14,7 +14,7 @@ describe('Test the people api to the limits...', () => {
       .expect(200, done);
   });
 
-  it(`get person with userId "a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1"`, done => {
+  it(`get person with a specific userId`, done => {
     request(app)
       .get(`${route}a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1`)
       .set('Accept', 'application/json')
@@ -27,9 +27,9 @@ describe('Test the people api to the limits...', () => {
     request(app)
       .post(`${route}`)
       .send({
-        "fullName": 'Carl Bieneck',
-        "email": 'carl@wbsweden.com',
-        "address": 'Mumindalen'
+        "fullName": "Carl Bieneck",
+        "email": "carl@wbsweden.com",
+        "address": "Mumindalen"
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -48,6 +48,19 @@ describe('Test the people api to the limits...', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(res => strictEqual(res.body.email, 'carl@bieneck.com'))
+      .expect(200, done)
+  });
+
+  it('update person fully', done => {
+    request(app)
+      .put(`${route}5d50fa98-0692-4208-ae30-27ce2114ab74`)
+      .send({
+        "fullName": "Lilla My",
+        "email": "lillamy@mumindalen.fi",
+        "address": "Muminhuset, Mumindalen"
+      })
+      .set('Accept', 'application/json')
+      .expect(res => strictEqual(res.body.fullName, 'Lilla My'))
       .expect(200, done)
   });
 });

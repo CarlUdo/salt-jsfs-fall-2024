@@ -1,11 +1,11 @@
 import express from 'express';
-import { peopleRouter } from './routes/people-router';
-import { errorHandler } from './middlewares/error-handler';
+import { peopleRouter } from './routes/people-router.js';
+import { errorHandler } from './middlewares/error-handler.js';
 import morgan from 'morgan';
 import path from 'path';
-import { wrongRoute } from './middlewares/wrong-route';
-import { PROJECT_CONFIG } from './config/project-config';
-const { createStream } = require('rotating-file-stream');
+import { wrongRoute } from './middlewares/wrong-route.js';
+import { PROJECT_CONFIG } from './config/project-config.js';
+import { createStream } from 'rotating-file-stream';
 
 const rootPath  = PROJECT_CONFIG.rootPath;
 
@@ -26,6 +26,8 @@ export const app = express();
   app.use(express.json({ limit: '5mb' }));
 
   app.use(express.static(path.join(rootPath, 'src', 'static', 'html')));
+
+  app.use(express.static(path.join(rootPath, 'dist', 'static'))); // Serving scripts won't work if "scripts" folder is added to path
 
   app.use('/api/people', peopleRouter);  
 

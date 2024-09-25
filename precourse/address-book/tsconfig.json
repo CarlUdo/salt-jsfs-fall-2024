@@ -11,6 +11,6 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "dist"
   },
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules", "dist", "src/static/scripts/main.ts"],
   "include": ["src/**/*.ts"]
 }

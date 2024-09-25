@@ -2,9 +2,10 @@
   "name": "address-book",
   "version": "1.0.0",
   "main": "app.ts",
+  "type": "module",
   "scripts": {
     "test": "mocha -r ts-node/register 'tests/**/*.spec.ts'",
-    "build": "tsc",
+    "build": "tsc && tsc --isolatedModules ./src/static/scripts/main.ts --outDir dist/static/scripts",
     "dev": "nodemon",
     "lint": "eslint .",
     "fix": "eslint . --fix",

@@ -1,4 +1,4 @@
-import { CompletePerson, CreatedPerson, ErrorInfo, Person } from '../types/types';
+import { CompletePerson, CreatedPerson, ErrorInfo, Person } from '../types/types.js';
 
 export const isPerson = (obj: any): obj is Person => {
   return (

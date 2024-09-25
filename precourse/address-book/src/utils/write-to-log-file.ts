@@ -1,9 +1,9 @@
-import { PROJECT_CONFIG } from "../config/project-config";
-import { getLocaleDateObj } from "./date-functions";
+import { PROJECT_CONFIG } from "../config/project-config.js";
+import { getLocaleDateObj } from "./date-functions.js";
 import path from "path";
 import { appendFileSync } from "fs";
-import { getLogMessage } from "./get-log-message";
-import { ErrorInfo } from "../types/types";
+import { getLogMessage } from "./get-log-message.js";
+import { ErrorInfo } from "../types/types.js";
 
 const { rootPath } = PROJECT_CONFIG;
 

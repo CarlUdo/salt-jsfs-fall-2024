@@ -1,4 +1,4 @@
-import type { ErrorInfo } from "../types/types";
+import type { ErrorInfo } from "../types/types.js";
 
 export const getErrorInformation = (err: any) => {
   return {

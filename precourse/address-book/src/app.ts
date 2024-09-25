@@ -1,5 +1,4 @@
-import { app } from "./api";
-
+import { app } from "./api.js";
 const HOST = process.env.SERVER_HOST || 'localhost';
 const PORT = Number(process.env.SERVER_PORT) || 4001;
 

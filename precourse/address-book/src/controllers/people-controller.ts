@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { db } from '../database/people-database';
-import { createPersonInDb, deletePersonInDb, findPersonInDb, updatePersonInDb, updatePersonPartitialInDb } from '../utils/db-helpers';
-import { isCreatedPerson } from '../utils/type-guards';
+import { db } from '../database/people-database.js';
+import { createPersonInDb, deletePersonInDb, findPersonInDb, updatePersonInDb, updatePersonPartitialInDb } from '../utils/db-helpers.js';
+import { isCreatedPerson } from '../utils/type-guards.js';
 
 export const getPeople = ((req: Request, res: Response, next: NextFunction) => {
   try {

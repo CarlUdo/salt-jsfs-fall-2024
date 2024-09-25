@@ -1,6 +1,6 @@
-import { generatePeople } from "./generate-people";
+import { generatePeople } from "./generate-people.js";
 import { writeFileSync } from 'fs';
-import { PROJECT_CONFIG } from "../config/project-config";
+import { PROJECT_CONFIG } from "../config/project-config.js";
 
 const { rootPath } = PROJECT_CONFIG;
 
@@ -8,7 +8,7 @@ export const generateInMemoryDatabase = (numberOfPersons: number) => {
   try {
     const db = generatePeople(numberOfPersons);
 
-    const importExportString = 'import type { CreatedPerson } from "../utils/types";\n\n' +
+    const importExportString = 'import type { CreatedPerson } from "../types/types.js";\n\n' +
       'export const db: CreatedPerson[] = ';
 
     const dbJsonString = `${importExportString}${JSON.stringify(db, null, 2)};\n`; 

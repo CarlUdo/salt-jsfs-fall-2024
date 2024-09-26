@@ -5,6 +5,8 @@ import { describe, it } from 'mocha';
 
 const route = '/api/people/';
 
+// -- Note! Every time a new database is generated - tests must be updated accordingly -- //
+
 describe('Test the people api to the limits...', () => {
   it('get all persons', done => {
     request(app)
@@ -17,10 +19,10 @@ describe('Test the people api to the limits...', () => {
 
   it(`get person with a specific userId`, done => {
     request(app)
-      .get(`${route}a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1`)
+      .get(`${route}54984823-5fe2-4ef7-b76a-2c9af0f4373c`)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect(res => strictEqual(res.body.fullName, 'Victor Ernser'))
+      .expect(res => strictEqual(res.body.fullName, 'Phyllis Krajcik'))
       .expect(200, done);
   });
 
@@ -42,7 +44,7 @@ describe('Test the people api to the limits...', () => {
 
   it('update person partially', done => {
     request(app)
-      .patch(`${route}a8b9c8d5-8989-4e8e-bfd8-9e9477c89fe1`)
+      .patch(`${route}3418bb2d-b0a2-4fd2-8234-d0bfb67dae79`)
       .send({
         "email": "carl@bieneck.com"
       })
@@ -54,7 +56,7 @@ describe('Test the people api to the limits...', () => {
 
   it('update person fully', done => {
     request(app)
-      .put(`${route}5d50fa98-0692-4208-ae30-27ce2114ab74`)
+      .put(`${route}74d992a5-7d35-4dbf-bd7f-3757fad1ac16`)
       .send({
         "fullName": "Lilla My",
         "email": "lillamy@mumindalen.fi",
@@ -67,7 +69,7 @@ describe('Test the people api to the limits...', () => {
 
   it('delete person with a specific userId', done => {
     request(app)
-      .delete(`${route}065b58ac-e0fe-4d0b-8c70-3fa984f3330c`)
+      .delete(`${route}e29f1aee-e293-421b-a4f5-dc451eb44d01`)
       .set('Accept', 'application/json')
       .expect(204, done);
   });

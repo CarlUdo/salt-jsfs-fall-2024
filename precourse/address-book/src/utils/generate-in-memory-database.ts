@@ -4,6 +4,7 @@ import { PROJECT_CONFIG } from "../config/project-config.js";
 
 const { rootPath } = PROJECT_CONFIG;
 
+// Note! Every time you generate a new database - tests in ~/tests/app.spec.ts must be updated accordingly
 export const generateInMemoryDatabase = (numberOfPersons: number) => {
   try {
     const db = generatePeople(numberOfPersons);

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPeople, getPerson, createPerson, updatePersonPartial, updatePerson, deletePerson } from '../controllers/people-controller.js';
+import { getPeople, getPerson, createPerson, updatePersonPartial, updatePerson, deletePerson } from '../controllers/people-controller';
 
 export const peopleRouter = express.Router();
 

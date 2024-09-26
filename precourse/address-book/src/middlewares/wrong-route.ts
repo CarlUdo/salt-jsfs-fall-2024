@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import path from "path";
-import { PROJECT_CONFIG } from "../config/project-config.js";
+import { PROJECT_CONFIG } from "../config/project-config";
 
 export const wrongRoute = ((req:Request, res: Response) => {
   const { rootPath } = PROJECT_CONFIG;

@@ -2,14 +2,13 @@
   "name": "address-book",
   "version": "1.0.0",
   "main": "app.ts",
-  "type": "module",
   "scripts": {
-    "test": "mocha -r ts-node/register 'tests/**/*.spec.ts'",
+    "test": "mocha -r tsx 'tests/**/*.spec.ts'",
     "build": "tsc && tsc --isolatedModules ./src/static/scripts/main.ts --outDir dist/static/scripts",
-    "dev": "nodemon",
+    "dev": "tsx watch -r dotenv/config ./src/app.ts",
+    "seed": "node dist/utils/generate-in-memory-database.js && tsc --isolatedModules ./src/database/people-database.ts --outDir dist",
     "lint": "eslint .",
-    "fix": "eslint . --fix",
-    "seed": "ts-node src/utils/generate-in-memory-database.ts"
+    "fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +27,7 @@
     "mocha": "^10.7.3",
     "nodemon": "^3.1.7",
     "supertest": "^7.0.0",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   },
   "dependencies": {

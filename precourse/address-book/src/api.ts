@@ -1,25 +1,22 @@
 import express from 'express';
-import { peopleRouter } from './routes/people-router.js';
-import { errorHandler } from './middlewares/error-handler.js';
+import { peopleRouter } from './routes/people-router';
+import { errorHandler } from './middlewares/error-handler';
 import morgan from 'morgan';
 import path from 'path';
-import { wrongRoute } from './middlewares/wrong-route.js';
-import { PROJECT_CONFIG } from './config/project-config.js';
-import { createStream } from 'rotating-file-stream';
+import { wrongRoute } from './middlewares/wrong-route';
+import { PROJECT_CONFIG } from './config/project-config';
 
 const rootPath  = PROJECT_CONFIG.rootPath;
-
-const createLogStream = async () => {
-  return createStream('access.log', {
-    interval: '1d', // rotate daily
-    path:  path.join(rootPath, 'logs', 'common')
-  });
-}
 
 export const app = express();
 
 (async () => {
-  const logStream = await createLogStream();
+  const rfs = await import('rotating-file-stream');
+
+  const logStream = rfs.createStream('access.log', {
+    interval: '1d', // rotate daily
+    path: path.join(rootPath, 'logs', 'common')
+  });
 
   app.use(morgan('combined', { stream: logStream }));
 

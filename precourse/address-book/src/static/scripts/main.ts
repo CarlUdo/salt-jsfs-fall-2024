@@ -1,4 +1,9 @@
-console.log('Inne i logger!!!');
+console.log('Ehhh')
+
 const logger = () => {
-  console.log('Trying this out...');
+  return `I'm logging!`;
+} 
+
+const loggerObj = {
+  logger
 };

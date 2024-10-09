@@ -13,8 +13,7 @@
   },
   "exclude": [
     "node_modules", 
-    "dist", 
-    "src/static/scripts/main.ts"
+    "dist"
   ],
   "include": ["src/**/*.ts"]
 }

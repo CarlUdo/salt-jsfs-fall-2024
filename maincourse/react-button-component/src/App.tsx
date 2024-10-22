@@ -5,4 +5,4 @@ function App() {
   return <ChangeColorButton />
 }
 
-export default App
+export default App;

@@ -1,13 +1,11 @@
 import { deepEqual } from "node:assert/strict";
 import request from "supertest"
 import test from "node:test";
-import express from "express";
+import { createApp } from "./app";
 
-const app = express();
+const app = createApp();
 
 test("Supertest works!", async () => {
-    
-
     app.get("/status", (req, res) => {
         res.status(200).json({status: "ready"});
     });

@@ -1,17 +1,37 @@
 import { deepEqual } from "node:assert/strict";
-import request from "supertest"
 import test from "node:test";
+import request from "supertest";
 import { createApp } from "./app";
 
-const app = createApp();
+test("GET /status", async () => {
+  const app = createApp();
 
-test("Supertest works!", async () => {
-    app.get("/status", (req, res) => {
-        res.status(200).json({status: "ready"});
-    });
+  const result = await request(app).get("/status");
 
-    const result = await request(app).get("/status");
+  deepEqual(result.status, 200);
+  deepEqual(result.body, { status: "ready" });
+});
 
-    deepEqual(result.status, 200);
-    deepEqual(result.body, {status: "ready"});
-})
+test("GET /api/v1/pancakes", async () => {
+  const app = createApp();
+
+  const result = await request(app).get("/api/v1/pancakes");
+
+  deepEqual(result.status, 200);
+  deepEqual(result.body, []);
+});
+
+test("POST /api/v1/pancakes", async () => {
+  const app = createApp();
+
+  const postResult = await request(app)
+    .post("/api/v1/pancakes")
+    .send({ layers: [] });
+
+    const getResult = await request(app)
+    .get("/api/v1/pancakes")
+    .send({ layers: [] });
+
+  deepEqual(postResult.status, 201);
+  deepEqual(getResult.body, [{ layers: [ ]}]);
+});
